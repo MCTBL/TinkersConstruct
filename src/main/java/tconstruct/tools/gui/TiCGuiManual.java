@@ -39,8 +39,6 @@ public class TiCGuiManual extends GuiManual {
     int maxPages;
     BookData bData;
 
-    private boolean isAnimationDone;
-
     private TiCTurnPageButton buttonNextPage;
     private TiCTurnPageButton buttonPreviousPage;
     private static ResourceLocation bookRight;// = new ResourceLocation("mantle", "textures/gui/bookright.png");
@@ -66,7 +64,6 @@ public class TiCGuiManual extends GuiManual {
         bookRight = data.rightImage;
         this.bData = data;
         this.guiOpenTime = System.currentTimeMillis();
-        this.isAnimationDone = false;
 
         // renderitem.renderInFrame = true;
     }
@@ -184,10 +181,6 @@ public class TiCGuiManual extends GuiManual {
         this.baseDrawingX = point[0];
         this.baseDrawingY = point[1];
 
-        if (!this.isAnimationDone && progress >= 1.0f) {
-            this.isAnimationDone = true;
-        }
-
         int drawX = (int) (this.baseDrawingX / scale);
         int drawY = (int) (this.baseDrawingY / scale);
 
@@ -208,7 +201,7 @@ public class TiCGuiManual extends GuiManual {
                 this.bookImageWidth,
                 this.bookImageHeight);
 
-        if (this.isAnimationDone) this.drawButtons(par1, par2, scale);
+        this.drawButtons(par1, par2, scale);
 
         if (pageLeft != null) pageLeft.renderBackgroundLayer(drawX + 16, drawY + 12);
         if (pageRight != null) pageRight.renderBackgroundLayer(drawX + 220, drawY + 12);
